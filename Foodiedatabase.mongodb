@@ -1,0 +1,61 @@
+//base de datos
+use("Database_testeo") 
+db.createCollection('coders')
+
+db.coders.insertOne({
+    name:'santiago',
+    lastname:'giraldo',
+    typeofDocumet:'cc',
+    idNumber:"10085268484",
+    email:"sacastro@unal.edu.co"
+    })
+
+db.coders.insertMany([{
+    name:'andres',
+    lastname:'tobon',
+    typeofDocumet:'cc',
+    idNumber:"10041589623",
+    email:"sacastro@unal.edu.co"
+    },
+    {
+    name:'camilo',
+    lastname:'acasio',
+    typeofDocumet:'cc',
+    idNumber:"10014225779",
+    email:"sacastro@unal.edu.co"
+    },
+    {
+    name:'santiago',
+    lastname:'pineda',
+    typeofDocumet:'cc',
+    idNumber:"10085265448",
+    email:"sapineda@unal.edu.co"
+    }])
+//consultar
+//all
+    db.coders.find()
+//by a same
+    db.coders.find({name:"camilo"})
+
+    db.coders.find({email:{$nin:["sacastro@unal.edu.co"]}})
+//actualizar
+    db.coders.updateOne(
+        { name:"camilo" }, 
+        { $set : { email:'caacasio@unal.edu.co'}}
+        ) ;
+
+    db.coders.updateMany(
+        {/*condition*/ },
+        {$set: {/*key:value to change*/}}
+    );
+
+    db.coders.updateMany(
+        {email:"sacastro@unal.edu.co"},
+        {$set: {salario: 5000}}
+    );
+//delete
+    db.coders.deleteOne(
+        {idNumber:"10085268484",}
+    );
+
+    db.user.count()
