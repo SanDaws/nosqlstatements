@@ -310,6 +310,7 @@ use("Database_Exercise")
 
 // 20. Encuentra todos los usuarios nacidos a partir del 1 de enero de 1985 (inclusive).
 use("Database_Exercise")
+db.user.find({date_of_birth:{$gte:"1985-01-01"}})
 
 // 21. Encuentra todos los usuarios cuya edad sea mayor o igual a 30 años (calcular usando
 // date_of_birth).
@@ -317,6 +318,7 @@ use("Database_Exercise")
 
 // 22. Encuentra todos los usuarios nacidos hasta el 1 de enero de 1990 (inclusive).
 use("Database_Exercise")
+db.user.find({date_of_birth:{$lte:"1985-01-01"}})
 
 // 23. Encuentra todos los usuarios cuya edad sea menor o igual a 25 años (calcular usando
 // date_of_birth).
@@ -324,6 +326,7 @@ use("Database_Exercise")
 
 // 24. Encuentra todos los usuarios que vivan en "Bogotá" o "Medellín".
 use("Database_Exercise")
+
 
 // 26. Encuentra todos los usuarios que no vivan en "Bogotá" ni "Medellín".
 use("Database_Exercise")
@@ -340,33 +343,3 @@ use("Database_Exercise")
 // 36. Encuentra todos los usuarios que no vivan en "Bogotá" ni sean de género "female".
 use("Database_Exercise")
 
-
-
-// Sí, en MongoDB puedes obtener la fecha actual y usarla en una consulta para comparar con una fecha almacenada en la base de datos. Utilizando el operador $lt (menor que) junto con la función new Date(), puedes realizar esta comparación.
-
-// Aquí hay un ejemplo de cómo hacerlo:
-
-// javascript
-
-// // Suponiendo que tienes una colección llamada "users" y cada documento tiene un campo "date_of_birth"
-
-// db.users.find({
-//     date_of_birth: { $lt: new Date() }
-// });
-
-// En este ejemplo, la consulta selecciona todos los documentos en los que el campo date_of_birth es menor que la fecha actual.
-
-// Si deseas comparar si una fecha hace 25 años es menor que una fecha en la base de datos, puedes usar la función ISODate() junto con la función getFullYear() para restar 25 años:
-
-// javascript
-
-// // Crear una variable que representa la fecha actual menos 25 años
-// const date25YearsAgo = new Date();
-// date25YearsAgo.setFullYear(date25YearsAgo.getFullYear() - 25);
-
-// // Realizar la consulta
-// db.users.find({
-//     date_of_birth: { $lt: date25YearsAgo }
-// });
-
-// De esta manera, date25YearsAgo contendrá la fecha actual menos 25 años, y luego puedes usarla en la consulta para comparar con las fechas almacenadas en la base de datos.
