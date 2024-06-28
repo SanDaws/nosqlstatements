@@ -299,7 +299,7 @@ db.user.find({date_of_birth:{$gt:"1990-01-01"}})
 // 17. Encuentra todos los usuarios cuya edad sea mayor a 30 años (calcular usando
 // date_of_birth).
 use("Database_Exercise")
-
+<<<<
 // 18. Encuentra todos los usuarios nacidos antes del 1 de enero de 1985.
 use("Database_Exercise")
 db.user.find({date_of_birth:{$lt:"1985-01-01"}})
@@ -307,7 +307,7 @@ db.user.find({date_of_birth:{$lt:"1985-01-01"}})
 // 19. Encuentra todos los usuarios cuya edad sea menor a 25 años (calcular usando
 // date_of_birth).
 use("Database_Exercise")
-
+<<<<
 // 20. Encuentra todos los usuarios nacidos a partir del 1 de enero de 1985 (inclusive).
 use("Database_Exercise")
 db.user.find({date_of_birth:{$gte:"1985-01-01"}})
@@ -326,20 +326,48 @@ use("Database_Exercise")
 
 // 24. Encuentra todos los usuarios que vivan en "Bogotá" o "Medellín".
 use("Database_Exercise")
+db.user.find(
+    {$or:[
+        {address: /Bogotá/},
+        {address: /Medellín/}
+    ]}
+)
 
 
 // 26. Encuentra todos los usuarios que no vivan en "Bogotá" ni "Medellín".
 use("Database_Exercise")
-
+db.user.find(
+    {$or:[
+        {address: {$nin:[/Bogotá/,/Medellín/]}}
+    ]}
+)
 // 30. Encuentra todos los usuarios que vivan en "Bogotá" y sean de género "male".
 use("Database_Exercise")
-
+db.user.find(
+    {$and:[
+        {address: /Bogotá/},
+        {gender: "male"}
+    ]}
+)
 // 32. Encuentra todos los usuarios que vivan en "Bogotá" o sean de género "female".
 use("Database_Exercise")
+db.user.find(
+    {$or:[
+        {address: /Bogotá/},
+        {gender: "female"}
+    ]}
+)
 
 // 34. Encuentra todos los usuarios cuyo género no sea "female" (usando $not).
 use("Database_Exercise")
-
+db.user.find(
+    {gender:{$not: /female/}}
+)
 // 36. Encuentra todos los usuarios que no vivan en "Bogotá" ni sean de género "female".
 use("Database_Exercise")
-
+db.user.find(
+    {$and:[
+        {address: {$not: /Bogotá/}},
+        {gender: {$not: /female/}}
+    ]}
+)
