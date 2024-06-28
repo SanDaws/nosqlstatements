@@ -1,0 +1,74 @@
+use("date_register")
+db.createCollection("birth")
+
+use("date_register")
+db.birth.insertOne(
+    {
+        first_name: "charles",
+        second_name:null,
+        first_lastname:"jung",
+        birth_date: new Date("1998-05-25"),
+        first_consult_date: new Date(2015,3,22),
+        last_consult_date: "2016-05-20",
+        last_update: new Date()
+
+    }
+)
+//
+use("date_register")
+
+db.birth.aggregate([
+    {
+      $project: {
+        age: {
+          $dateDiff: {
+            startDate: "$birth_date",
+            endDate: new Date(),
+            unit: "year"
+          }
+        }
+      }
+    }
+  ])
+  
+use("date_register")
+db.birth.aggregate([
+    {
+      $project: {
+        diferenciaDias: {
+          $dateDiff: {
+            startDate: { $toDate: "$last_consult_date" },
+            endDate: new Date(),
+            unit: "year"
+          }
+        }
+      }
+    }
+  ])
+  
+  
+
+  use("date_register")
+  db.birth.aggregate([
+    {
+      $project: {
+        age: {
+          $dateDiff: {
+            startDate: "$birth_date",
+            endDate: new Date(),
+            unit: "year"
+          }
+        }
+      }
+    },
+    {
+      $match: {
+        age: { $gt: 25, $lt: 30 }
+      }
+    }
+  ])
+  
+
+
+  use("date_register")
+  db.birth.find()
